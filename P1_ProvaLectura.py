@@ -8,11 +8,17 @@
 @Version :   1.0
 '''
 
+import matplotlib
 import numpy as np
 import netCDF4 as nc
+import datetime as dt
 import cartopy as cart
 import matplotlib.pyplot as plt
 from cartopy.mpl.ticker import LatitudeFormatter, LongitudeFormatter
+
+# Per a cambiar les lletres a l'estil que és te a latex
+matplotlib.rcParams['mathtext.fontset'] = 'stix'
+matplotlib.rcParams['font.family'] = 'STIXGeneral'
 
 arxiu = 'AQUA_MODIS.20200102T125001.L2.SST.nc'
 
@@ -20,12 +26,21 @@ arxiu = 'AQUA_MODIS.20200102T125001.L2.SST.nc'
 data = nc.Dataset('DadesMar/'+ arxiu, 'r')
 # print(data.groups)
 
+if 0:
+    print(data.ncattrs())
+    print(data.getncattr('title'))
+
 Geo = data.groups['geophysical_data']
 # print(Geo.variables.keys())
 
 # Extreim informació del dia
 info = data['scan_line_attributes']
-dia = str(info['day'][0])
+dia = int(info['day'][0])
+Temps = dt.date(2020, 1, dia)
+Temps.strftime("%d/%m/%Y")
+
+time = data.getncattr('time_coverage_start')
+T = time.replace('T', ' ').split('.')[0]
 
 # Extreim les coordenades
 nav = data['navigation_data']
@@ -43,9 +58,9 @@ sst = np.fliplr(Geo.variables['sst'][:])
 fig = plt.figure(figsize=(9, 7), dpi=400)
 ax = plt.axes(projection=cart.crs.PlateCarree())
 ax.coastlines()
-ax.add_feature(cart.feature.LAND, zorder=100, edgecolor='k')
+ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)
 
-plot = ax.contourf(lon, lat, sst, 60, transform=cart.crs.PlateCarree())
+plot = ax.contourf(lon, lat, sst, 70, transform=cart.crs.PlateCarree())
 
 # Ticks per a la longitud
 ax.set_xticks(np.arange(np.min(lon[:]), np.max(lon[:]), 6), crs=cart.crs.PlateCarree())
@@ -58,7 +73,6 @@ lat_formatter = LatitudeFormatter(number_format='.2f')
 ax.yaxis.set_major_formatter(lat_formatter)
 
 cb = plt.colorbar(plot)
-# cb.set_title("sst (ºC)")
 cb.set_label("sst (ºC)", rotation=270)
-ax.set_title(f"Dades sst pel dia {dia}")
+ax.set_title(f"Dades sst pel dia {T}")
 plt.show()
