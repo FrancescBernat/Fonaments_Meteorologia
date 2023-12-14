@@ -19,6 +19,7 @@ from cartopy.mpl.ticker import LatitudeFormatter, LongitudeFormatter
 # Per a cambiar les lletres a l'estil que és te a latex
 matplotlib.rcParams['mathtext.fontset'] = 'stix'
 matplotlib.rcParams['font.family'] = 'STIXGeneral'
+matplotlib.rcParams.update({'font.size': 14})
 
 arxiu = 'AQUA_MODIS.20200102T125001.L2.SST.nc'
 
