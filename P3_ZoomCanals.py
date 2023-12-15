@@ -75,10 +75,10 @@ lat_Glo = [37, 42]
 lon_Glo = [1, 6]
 
 lat_CMe = [39.7, 40]
-lon_CMe = [3.2, 3.8]
+lon_CMe = [3.2, 3.9]
 
 lat_CMa = [38.6, 39.5]
-lon_CMa = [1.6, 3]
+lon_CMa = [1.5, 3]
 
 def ZonaZoom(dades, lon_Loc, lat_Loc):
     '''
@@ -103,7 +103,7 @@ def ZonaZoom(dades, lon_Loc, lat_Loc):
 
 # Ara per a poder visualitzar 
 
-def Repr(PlotData, lon_Loc, lat_Loc):
+def Repr(PlotData, lon_Loc, lat_Loc, Zona):
     '''
     Funció per a representar un contorn del sst de l'area de
     interes.
@@ -136,5 +136,14 @@ def Repr(PlotData, lon_Loc, lat_Loc):
 
     cb = plt.colorbar(plot)
     cb.set_label("sst (ºC)", rotation=270)
-    ax.set_title(f"Dades sst pel dia {T}")
+    ax.set_title(f"Dades sst pel dia {T} a {Zona}")
     plt.show()
+
+lats = [lat_Glo, lat_CMe, lat_CMa]
+lons = [lon_Glo, lon_CMe, lon_CMa]
+labels = ['Illes Balears', 'Canal de Menorca', 
+          'Canal de Mallorca']
+
+for la, lo, lab in zip(lats, lons, labels):
+    red_data = ZonaZoom(da, lo, la)
+    Repr(red_data, lo, la, lab)
