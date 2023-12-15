@@ -64,12 +64,12 @@ ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)
 plot = ax.contourf(cro_da.lon, cro_da.lat, cro_da, 70, transform=cart.crs.PlateCarree())
 
 # Ticks per a la longitud
-ax.set_xticks(np.linspace(np.min(cro_da.lon[:]), np.max(cro_da.lon[:]), 5), crs=cart.crs.PlateCarree())
+ax.set_xticks(np.linspace(min_lon, max_lon, 5), crs=cart.crs.PlateCarree())
 lon_formatter = LongitudeFormatter(number_format='.2f')
 ax.xaxis.set_major_formatter(lon_formatter)
 
 # Ticks per a la latitud
-ax.set_yticks(np.linspace(np.min(cro_da.lat[:]), np.max(cro_da.lat[:]), 5), crs=cart.crs.PlateCarree())
+ax.set_yticks(np.linspace(min_lat, max_lat, 5), crs=cart.crs.PlateCarree())
 lat_formatter = LatitudeFormatter(number_format='.2f')
 ax.yaxis.set_major_formatter(lat_formatter)
 
