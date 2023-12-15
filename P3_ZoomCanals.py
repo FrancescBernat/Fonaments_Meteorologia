@@ -145,5 +145,5 @@ labels = ['Illes Balears', 'Canal de Menorca',
           'Canal de Mallorca']
 
 for la, lo, lab in zip(lats, lons, labels):
-    red_data = ZonaZoom(da, lo, la)
+    red_data = ZonaZoom(data, lo, la)
     Repr(red_data, lo, la, lab)
