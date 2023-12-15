@@ -70,6 +70,7 @@ data = xr.DataArray(
                                   lat=(["x", "y"], lat))
                     )
 
+# Definesc ara les latituds i les longituds de cada zona.
 lat_Glo = [37, 42]
 lon_Glo = [1, 6]
 
@@ -78,3 +79,62 @@ lon_CMe = [3.2, 3.8]
 
 lat_CMa = [38.6, 39.5]
 lon_CMa = [1.6, 3]
+
+def ZonaZoom(dades, lon_Loc, lat_Loc):
+    '''
+    Funció que donat unes dades (en DataArray) i unes longitud
+    i latituds minimes i máximes. Retorna el troz que és troba 
+    localitzat entre aquestes coordenades.
+
+        dades --> DataArray de xarray amb lon i lat de coordenades
+
+        lon_Loc --> Diccionari amb la longitud minima i la maxima
+
+        lat_Loc --> Diccionari amb la latitud mínima i la maxima 
+    '''
+
+    min_lon, max_lon = lon_Loc
+    min_lat, max_lat = lat_Loc
+
+    mask_lon = (dades.lon >= min_lon) & (dades.lon <= max_lon)
+    mask_lat = (dades.lat >= min_lat) & (dades.lat <= max_lat)
+
+    return dades.where(mask_lon & mask_lat, drop=True)
+
+# Ara per a poder visualitzar 
+
+def Repr(PlotData, lon_Loc, lat_Loc):
+    '''
+    Funció per a representar un contorn del sst de l'area de
+    interes.
+    '''
+
+    # Extreim les longituds i latituds mínimes i maximes
+    min_lon, max_lon = lon_Loc
+    min_lat, max_lat = lat_Loc
+
+    fig = plt.figure(figsize=(9, 7), dpi=400)
+    ax = plt.axes(projection=cart.crs.PlateCarree())
+    ax.coastlines()
+    ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)
+
+    plot = ax.contourf(PlotData.lon, PlotData.lat, PlotData, 70, 
+                       transform=cart.crs.PlateCarree(), cmap='RdYlBu_r')
+
+    # Ticks per a la longitud
+    ax.set_xticks(np.linspace(min_lon, max_lon, 5), crs=cart.crs.PlateCarree())
+    lon_formatter = LongitudeFormatter(number_format='.2f')
+    ax.xaxis.set_major_formatter(lon_formatter)
+
+    # Ticks per a la latitud
+    ax.set_yticks(np.linspace(min_lat, max_lat, 5), crs=cart.crs.PlateCarree())
+    lat_formatter = LatitudeFormatter(number_format='.2f')
+    ax.yaxis.set_major_formatter(lat_formatter)
+
+    ax.set_xlim([min_lon, max_lon])
+    ax.set_ylim([min_lat, max_lat])
+
+    cb = plt.colorbar(plot)
+    cb.set_label("sst (ºC)", rotation=270)
+    ax.set_title(f"Dades sst pel dia {T}")
+    plt.show()
