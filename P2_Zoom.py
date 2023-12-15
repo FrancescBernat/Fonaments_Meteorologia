@@ -16,6 +16,7 @@ import matplotlib as mp
 import matplotlib.pyplot as plt
 
 from cmocean import cm
+from matplotlib.colors import LinearSegmentedColormap
 from cartopy.mpl.ticker import LatitudeFormatter, LongitudeFormatter
 
 # Per a cambiar les lletres a l'estil que és te a latex
@@ -49,14 +50,14 @@ max_lat = 42
 
 da = xr.DataArray(sst, dims=['x', 'y'], 
                   coords = dict(lon=(["x", "y"], lon), 
-                            lat=(["x", "y"], lat)))
+                                lat=(["x", "y"], lat)))
 
 mask_lon = (da.lon >= min_lon) & (da.lon <= max_lon)
 mask_lat = (da.lat >= min_lat) & (da.lat <= max_lat)
 
 cro_da = da.where(mask_lon & mask_lat, drop=True)
 
-from matplotlib.colors import LinearSegmentedColormap
+
 _RGB_CODES = ["#663300", "#852800", "#a41e00", "#c21400", "#e10a00", "#ff0000", "#ea2915", 
              "#d65229", "#ce7137", "#d0853f", "#d29946", "#e4c27c", "#f6ebb2", "#d6ffe1", 
              "#7af4ff", "#00ccff", "#15a3d6", "#297aad", "#285b99", "#144799", "#003399",
