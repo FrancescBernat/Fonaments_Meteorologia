@@ -6,6 +6,11 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+    Glo --> Abrevació per les coordenades que conté les 
+            Illes Balears
+    CMa --> Abreviació que usaré pel canal de Mallorca
+    CMe --> Abreviació que usaré pel canal de Menorca
 '''
 
 import numpy as np
@@ -58,3 +63,18 @@ def DadesMODIS(arxiu):
 
 T, sst, lat, lon = DadesMODIS(arxiu)
 
+
+data = xr.DataArray(
+                    sst, dims=['x', 'y'], 
+                    coords = dict(lon=(["x", "y"], lon), 
+                                  lat=(["x", "y"], lat))
+                    )
+
+lat_Glo = [37, 42]
+lon_Glo = [1, 6]
+
+lat_CMe = [39.7, 40]
+lon_CMe = [3.2, 3.8]
+
+lat_CMa = [38.6, 39.5]
+lon_CMa = [1.6, 3]
