@@ -30,7 +30,9 @@ def DadesMODIS(arxiu):
     '''
     Funció que, donat el nom d'un arxiu determinat nom d'un arxiu de 
     sst retorna:
-        T   --> El temps en que és va començar a enregistrar les dades
+
+        T   --> El temps en que és va començar a enregistrar les 
+                dades.
         sst --> Les dades sst
         lat --> La latitud
         lon --> La longitud
@@ -53,8 +55,6 @@ def DadesMODIS(arxiu):
     lon = np.fliplr(nav['longitude'][:])
 
     return T, sst, lat, lon
-
-
 
 T, sst, lat, lon = DadesMODIS(arxiu)
 
