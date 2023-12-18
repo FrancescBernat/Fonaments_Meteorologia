@@ -49,6 +49,10 @@ for file in arxius:
 
     date = dt.datetime.strptime(T, "%Y-%m-%d %H:%M:%S")
 
+    fun.GuardGraf(data, 
+                [np.nanmin(data.lon.data), np.nanmax(data.lon.data)],
+                [np.nanmin(data.lat.data), np.nanmax(data.lat.data)], 
+                'Imatges/Glob', date)
 
     for la, lo, lab in zip(lats, lons, labels):
 

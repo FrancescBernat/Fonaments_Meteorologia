@@ -150,3 +150,4 @@ def GuardGraf(PlotData, lon_Loc, lat_Loc, Zona, T):
     ax.set_title(f"Dades sst pel dia {T}")
     date  = T.strftime("%Y_%m_%d_%H_%M_%S")
     plt.savefig( Zona +'/'+ date +'.png', dpi=450)
+    plt.close(fig)
