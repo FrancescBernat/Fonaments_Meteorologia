@@ -27,6 +27,8 @@ r = np.unique(r)
 
 df.drop(r)
 # plt.style.use('_mpl-gallery')
+# plt.style.use('dark_background')
+# plt.style.use('seaborn-v0_8-deep')
 
 x = df['dia']
 Mit_IB = df['Mitj IB']
@@ -63,3 +65,14 @@ def fillPlot(Mitj, DesvEst):
 for M, D in zip([Mit_IB, Mit_CMe, Mit_CMa],
                 [Desv_IB, Desv_CMe, Desv_CMa]):
     fillPlot(M, D)
+
+fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
+ax.plot(x, Mit_IB, label="Illes Balears")
+ax.plot(x, Mit_CMe, label="Canal de Menorca")
+ax.plot(x, Mit_CMa, label="Canal de Mallorca")
+
+ax.set(xticks=x[::5])
+ax.set_ylabel('sst (ºC)', fontsize=30)
+ax.legend()
+fig.autofmt_xdate()
+plt.show()
