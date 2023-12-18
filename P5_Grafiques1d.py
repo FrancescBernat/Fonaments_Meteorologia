@@ -38,22 +38,28 @@ Desv_CMe = df['Desv CMe']
 Mit_CMa = df['Mitj CMa']
 Desv_CMa = df['Desv CMa']
 
-# plot
-fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
+def fillPlot(Mitj, DesvEst):
+    
+    fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
 
-ax.fill_between(x, Mit_IB-Desv_IB, Mit_IB+Desv_IB, 
-                alpha=.5, linewidth=0)
-ax.plot(x, Mit_IB, linewidth=2)
+    ax.fill_between(x, Mitj-DesvEst, Mitj+DesvEst, 
+                    alpha=.5, linewidth=0)
+    ax.plot(x, Mitj, linewidth=2)
 
-# ax.fill_between(x, Mit_CMe-Desv_CMe, Mit_CMe+Desv_CMe, 
-#                 alpha=.5, linewidth=0)
-# ax.plot(x, Mit_CMe, linewidth=2)
+    # ax.fill_between(x, Mit_CMe-Desv_CMe, Mit_CMe+Desv_CMe, 
+    #                 alpha=.5, linewidth=0)
+    # ax.plot(x, Mit_CMe, linewidth=2)
 
-# ax.fill_between(x, Mit_CMa-Desv_CMa, Mit_CMa+Desv_CMa, 
-#                 alpha=.5, linewidth=0)
-# ax.plot(x, Mit_CMa, linewidth=2)
+    # ax.fill_between(x, Mit_CMa-Desv_CMa, Mit_CMa+Desv_CMa, 
+    #                 alpha=.5, linewidth=0)
+    # ax.plot(x, Mit_CMa, linewidth=2)
 
 
-ax.set(xticks=x[::5], ylabel='sst (ºC)')
-fig.autofmt_xdate()
-plt.show()
+    ax.set(xticks=x[::5])
+    ax.set_ylabel('sst (ºC)', fontsize=30)
+    fig.autofmt_xdate()
+    plt.show()
+
+for M, D in zip([Mit_IB, Mit_CMe, Mit_CMa],
+                [Desv_IB, Desv_CMe, Desv_CMa]):
+    fillPlot(M, D)

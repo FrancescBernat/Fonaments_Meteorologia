@@ -45,6 +45,7 @@ labels = ['Illes Balears', 'Canal de Menorca',
 Mit = []
 Desv = []
 numNan = []
+Tam = []
 
 Dades_Sat = pd.DataFrame()
 
@@ -72,13 +73,13 @@ for file in arxius:
         numNan.append(np.count_nonzero(np.isnan(red_data.data)))
         Mit.append(np.nanmean(red_data.data))
         Desv.append(np.nanstd(red_data.data))
-
+        Tam.append(red_data.size)
 
     df = pd.DataFrame(
-        {'dia': [T], 'satelit':[Satelit], 'Nan IB':numNan[0], 'Mitj IB':Mit[0],
-        'Desv IB':Desv[0], 'Nan CMe':numNan[1], 'Mitj CMe':Mit[1], 
-        'Desv CMe':Desv[1], 'Nan CMa':numNan[2], 'Mitj CMa':Mit[2], 
-        'Desv CMa':Desv[2]}
+        {'dia': [T], 'satelit':[Satelit], 
+         'Nan IB':numNan[0],  'Mitj IB':Mit[0],  'Desv IB':Desv[0], 'Tam Ib':Tam[0],
+         'Nan CMe':numNan[1], 'Mitj CMe':Mit[1], 'Desv CMe':Desv[1], 'Tam CMe':Tam[1],
+         'Nan CMa':numNan[2], 'Mitj CMa':Mit[2], 'Desv CMa':Desv[2], 'Tam CMa':Tam[2]}
         )
 
     Dades_Sat = pd.concat([Dades_Sat, df], ignore_index=True)
