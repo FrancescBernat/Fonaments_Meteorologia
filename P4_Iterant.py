@@ -77,7 +77,7 @@ for file in arxius:
 
     df = pd.DataFrame(
         {'dia': [T], 'satelit':[Satelit], 
-         'Nan IB':numNan[0],  'Mitj IB':Mit[0],  'Desv IB':Desv[0], 'Tam Ib':Tam[0],
+         'Nan IB':numNan[0],  'Mitj IB':Mit[0],  'Desv IB':Desv[0], 'Tam IB':Tam[0],
          'Nan CMe':numNan[1], 'Mitj CMe':Mit[1], 'Desv CMe':Desv[1], 'Tam CMe':Tam[1],
          'Nan CMa':numNan[2], 'Mitj CMa':Mit[2], 'Desv CMa':Desv[2], 'Tam CMa':Tam[2]}
         )

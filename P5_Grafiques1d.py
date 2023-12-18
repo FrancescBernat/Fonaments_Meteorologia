@@ -25,10 +25,23 @@ r = np.unique(r)
 
 # diesNan = df['dia'][r]
 
-df.drop(r)
+# df = df.drop(r)
 # plt.style.use('_mpl-gallery')
 # plt.style.use('dark_background')
 # plt.style.use('seaborn-v0_8-deep')
+
+# Miram els indexos on els Nan superen el 50 %.
+ind_Bad = []
+
+for var in ['CMe', 'CMa', 'IB']:
+    minNan = df['Nan '+var].min()
+    aux = np.squeeze(np.where(
+        (df['Nan '+var]-minNan)/df['Tam '+ var] > 0.4
+        ))
+    ind_Bad += aux.tolist()
+ind = np.unique(ind_Bad + r.tolist())
+
+Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
 
 x = df['dia']
 Mit_IB = df['Mitj IB']
