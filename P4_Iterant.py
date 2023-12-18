@@ -6,6 +6,10 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+    IB  -->  Per referirnos a les Illes Balears
+    CMe -->  Per referirnos al canal de Menorca
+    CMa -->  Per referirnos al canal de Mallorca
 '''
 
 import glob 
@@ -37,36 +41,44 @@ lons = [lon_Glo, lon_CMe, lon_CMa]
 labels = ['Illes Balears', 'Canal de Menorca', 
           'Canal de Mallorca']
 
-
-T, sst, lat, lon = fun.DadesMODIS(arxius[0])
-
-Satelit = arxius[0].split('_')[0].split('\\')[1]
-
-data = xr.DataArray(
-                    sst, dims=['x', 'y'], 
-                    coords = dict(lon=(["x", "y"], lon), 
-                                lat=(["x", "y"], lat))
-                    )
-
-date = dt.datetime.strptime(T, "%Y-%m-%d %H:%M:%S")
-
+# Cream llistes i Dataframes buits per usar mes endavant
 Mit = []
 Desv = []
 numNan = []
 
-for la, lo, lab in zip(lats, lons, labels):
+Dades_Sat = pd.DataFrame()
 
-    red_data = fun.ZonaZoom(data, lo, la)
+for file in arxius:
 
-    numNan.append(np.count_nonzero(np.isnan(red_data.data)))
-    Mit.append(np.nanmean(red_data.data))
-    Desv.append(np.nanstd(red_data.data))
+    [i.clear() for i in [Mit, Desv, numNan]]
 
-    # fun.Repr(red_data, lo, la, lab, date)
+    T, sst, lat, lon = fun.DadesMODIS(file)
 
-df = pd.DataFrame(
-    {'dia': [T], 'satelit':[Satelit], 'Nan IB':numNan[0], 'Mitj IB':Mit[0],
-     'Desv IB':Desv[0], 'Nan CMe':numNan[1], 'Mitj CMe':Mit[1], 
-     'Desv CMe':Desv[1], 'Nan CMa':numNan[2], 'Mitj CMa':Mit[2], 
-     'Desv CMa':Desv[2]}
-    )
+    Satelit = file.split('_')[0].split('\\')[1]
+
+    data = xr.DataArray(
+                        sst, dims=['x', 'y'], 
+                        coords = dict(lon=(["x", "y"], lon), 
+                                    lat=(["x", "y"], lat))
+                        )
+
+    date = dt.datetime.strptime(T, "%Y-%m-%d %H:%M:%S")
+
+
+    for la, lo in zip(lats, lons):
+
+        red_data = fun.ZonaZoom(data, lo, la)
+
+        numNan.append(np.count_nonzero(np.isnan(red_data.data)))
+        Mit.append(np.nanmean(red_data.data))
+        Desv.append(np.nanstd(red_data.data))
+
+
+    df = pd.DataFrame(
+        {'dia': [T], 'satelit':[Satelit], 'Nan IB':numNan[0], 'Mitj IB':Mit[0],
+        'Desv IB':Desv[0], 'Nan CMe':numNan[1], 'Mitj CMe':Mit[1], 
+        'Desv CMe':Desv[1], 'Nan CMa':numNan[2], 'Mitj CMa':Mit[2], 
+        'Desv CMa':Desv[2]}
+        )
+
+    Dades_Sat = pd.concat([Dades_Sat, df], ignore_index=True)
