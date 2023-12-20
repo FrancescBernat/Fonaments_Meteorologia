@@ -44,25 +44,11 @@ for var in ['CMe', 'CMa', 'IB']:
 # Combinam el cas anterior amb  els llocs on son tots nans
 ind = np.unique(ind_Bad + r.tolist())
 
-# plt.style.use('_mpl-gallery')
-# plt.style.use('dark_background')
-# plt.style.use('seaborn-v0_8-deep')
-
 colors = ['#4C72B0', '#55A868', '#C44E52', '#8172B2', '#CCB974', '#64B5CD']
 
 x = df['dia']
 Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
 Desv_IB, Desv_CMe, Desv_CMa = [df['Desv ' + var] for var in ['IB', 'CMe', 'CMa']]
-
-# Mit_IB = df['Mitj IB']
-# Desv_IB = df['Desv IB']
-
-# Mit_CMe = df['Mitj CMe']
-# Desv_CMe = df['Desv CMe']
-
-# Mit_CMa = df['Mitj CMa']
-# Desv_CMa = df['Desv CMa']
-
 
 def ErrorPlot(x, y, yerr, color):
     fig, ax = plt.subplots(figsize=(10, 8), dpi=600)
@@ -79,13 +65,22 @@ def ErrorPlot(x, y, yerr, color):
 # for i in colors:
     # ErrorPlot(x, Mit_IB, Desv_IB, i)
 
-# Graficam les dades sense filtrar
+
 for M, D, tit, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
                 [Desv_IB, Desv_CMe, Desv_CMa], 
                 ['Illes Balears', 'Canal de Menorca',
                  'Canal de Mallorca'], range(3)):
     
+    # Graficam les dades sense filtrar
     fun.fillPlot(x, M, D, tit, colors[col])
+    
+    # Filtram les dades
+    M[ind] = np.nan
+    D[ind] = np.nan
+
+    # Graficam les dades filtrades
+    fun.fillPlot(x, M, D, tit, colors[col])
+    
 
 fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
 ax.plot(x, Mit_IB, label="Illes Balears", color=colors[0])
