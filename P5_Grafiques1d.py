@@ -44,6 +44,8 @@ ind = np.unique(ind_Bad + r.tolist())
 # plt.style.use('dark_background')
 # plt.style.use('seaborn-v0_8-deep')
 
+colors = ['#4C72B0', '#55A868', '#C44E52', '#8172B2', '#CCB974', '#64B5CD']
+
 x = df['dia']
 Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
 Desv_IB, Desv_CMe, Desv_CMa = [df['Desv ' + var] for var in ['IB', 'CMe', 'CMa']]
@@ -79,6 +81,17 @@ def fillPlot(Mitj, DesvEst):
     fig.autofmt_xdate()
     plt.show()
 
+def ErrorPlot(x, y, yerr):
+    fig, ax = plt.subplots()
+
+    ax.errorbar(x, y, yerr, fmt='o', linewidth=2, capsize=6)
+
+    ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
+        ylim=(0, 8), yticks=np.arange(1, 8))
+
+    plt.show()
+
+    
 for M, D in zip([Mit_IB, Mit_CMe, Mit_CMa],
                 [Desv_IB, Desv_CMe, Desv_CMa]):
     fillPlot(M, D)
