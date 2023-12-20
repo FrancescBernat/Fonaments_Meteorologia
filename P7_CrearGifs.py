@@ -14,11 +14,14 @@ import imageio
 subfolders = ['IB', 'CMe',  'CMa', 'Glob']
 folders = ['Imatges/'+i for i in subfolders]
 
-filenames = glob.glob(folders[0]+"/*.png")
+i = 0
+for folder in folders:
+    filenames = glob.glob(folder+"/*.png")
 
-images = []
-for filename in filenames:
-    images.append(imageio.imread(filename))
+    images = []
+    for filename in filenames:
+        images.append(imageio.imread(filename))
 
-imageio.mimsave('movie.gif', images, format='GIF',
-                 duration=900)
+    imageio.mimsave(subfolders[i]+'.gif', images,
+                    format='GIF', duration=900)
+    i += 1
