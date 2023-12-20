@@ -59,13 +59,13 @@ Desv_IB, Desv_CMe, Desv_CMa = [df['Desv ' + var] for var in ['IB', 'CMe', 'CMa']
 # Mit_CMa = df['Mitj CMa']
 # Desv_CMa = df['Desv CMa']
 
-def fillPlot(Mitj, DesvEst):
+def fillPlot(Mitj, DesvEst, col):
     
     fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
 
     ax.fill_between(x, Mitj-DesvEst, Mitj+DesvEst, 
-                    alpha=.5, linewidth=0)
-    ax.plot(x, Mitj, linewidth=2)
+                    alpha=.5, linewidth=0, color=col)
+    ax.plot(x, Mitj, linewidth=2, color=col)
 
     # ax.fill_between(x, Mit_CMe-Desv_CMe, Mit_CMe+Desv_CMe, 
     #                 alpha=.5, linewidth=0)
@@ -81,25 +81,30 @@ def fillPlot(Mitj, DesvEst):
     fig.autofmt_xdate()
     plt.show()
 
-def ErrorPlot(x, y, yerr):
-    fig, ax = plt.subplots()
+def ErrorPlot(x, y, yerr, color):
+    fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
 
-    ax.errorbar(x, y, yerr, fmt='o', linewidth=2, capsize=6)
+    ax.errorbar(x, y, yerr, fmt='o', linewidth=2, capsize=6,
+                color=color)
 
-    ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-        ylim=(0, 8), yticks=np.arange(1, 8))
+    # ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
+    #     ylim=(0, 8), yticks=np.arange(1, 8))
 
+    fig.autofmt_xdate()
     plt.show()
 
-    
-for M, D in zip([Mit_IB, Mit_CMe, Mit_CMa],
-                [Desv_IB, Desv_CMe, Desv_CMa]):
-    fillPlot(M, D)
+# for i in colors:
+    # ErrorPlot(x, Mit_IB, Desv_IB, i)
+
+
+for M, D, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
+                [Desv_IB, Desv_CMe, Desv_CMa], range(3)):
+    fillPlot(M, D, colors[col])
 
 fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
-ax.plot(x, Mit_IB, label="Illes Balears")
-ax.plot(x, Mit_CMe, label="Canal de Menorca")
-ax.plot(x, Mit_CMa, label="Canal de Mallorca")
+ax.plot(x, Mit_IB, label="Illes Balears", color=colors[0])
+ax.plot(x, Mit_CMe, label="Canal de Menorca", color=colors[1])
+ax.plot(x, Mit_CMa, label="Canal de Mallorca", color=colors[2])
 
 ax.set(xticks=x[::5])
 ax.set_ylabel('sst (ºC)', fontsize=30)
