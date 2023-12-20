@@ -88,8 +88,10 @@ def Repr(PlotData, lon_Loc, lat_Loc, Zona, T):
     ax.coastlines()
     ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)
 
+    levels = np.linspace(-4, 18, 100+1)
     plot = ax.contourf(PlotData.lon, PlotData.lat, PlotData, 70, 
-                       transform=cart.crs.PlateCarree(), cmap='RdYlBu_r')
+                       transform=cart.crs.PlateCarree(), cmap='RdYlBu_r',
+                       levels=levels)
 
     # Ticks per a la longitud
     ax.set_xticks(np.linspace(min_lon, max_lon, 5), crs=cart.crs.PlateCarree())
@@ -129,8 +131,11 @@ def GuardGraf(PlotData, lon_Loc, lat_Loc, Zona, T):
     ax.coastlines()
     ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)
 
+    levels = np.linspace(-4, 18, 100+1)
     plot = ax.contourf(PlotData.lon, PlotData.lat, PlotData, 70, 
-                        transform=cart.crs.PlateCarree(), cmap='RdYlBu_r')
+                       transform=cart.crs.PlateCarree(), cmap='RdYlBu_r',
+                       levels=levels)
+
 
     # Ticks per a la longitud
     ax.set_xticks(np.linspace(min_lon, max_lon, 5), crs=cart.crs.PlateCarree())
@@ -147,8 +152,8 @@ def GuardGraf(PlotData, lon_Loc, lat_Loc, Zona, T):
 
     cb = plt.colorbar(plot)
     cb.set_label("sst (ºC)", rotation=270)
-    cb.mappable.set_clim(vmin=-3.5, vmax=17.5)
-
+    # cb.mappable.set_clim(vmin=-3.5, vmax=17.5)
+    
     ax.set_title(f"Dades sst pel dia {T}")
     date  = T.strftime("%Y_%m_%d_%H_%M_%S")
     plt.savefig( Zona +'/'+ date +'.png', dpi=450)

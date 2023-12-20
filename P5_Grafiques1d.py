@@ -44,17 +44,18 @@ ind = np.unique(ind_Bad + r.tolist())
 # plt.style.use('dark_background')
 # plt.style.use('seaborn-v0_8-deep')
 
-Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
-
 x = df['dia']
-Mit_IB = df['Mitj IB']
-Desv_IB = df['Desv IB']
+Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
+Desv_IB, Desv_CMe, Desv_CMa = [df['Desv ' + var] for var in ['IB', 'CMe', 'CMa']]
 
-Mit_CMe = df['Mitj CMe']
-Desv_CMe = df['Desv CMe']
+# Mit_IB = df['Mitj IB']
+# Desv_IB = df['Desv IB']
 
-Mit_CMa = df['Mitj CMa']
-Desv_CMa = df['Desv CMa']
+# Mit_CMe = df['Mitj CMe']
+# Desv_CMe = df['Desv CMe']
+
+# Mit_CMa = df['Mitj CMa']
+# Desv_CMa = df['Desv CMa']
 
 def fillPlot(Mitj, DesvEst):
     
