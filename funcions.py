@@ -13,6 +13,7 @@ import netCDF4 as nc
 import matplotlib as mp
 import cartopy as cart
 import matplotlib.pyplot as plt
+import matplotlib.ticker as tck
 
 from cartopy.mpl.ticker import LatitudeFormatter
 from cartopy.mpl.ticker import LongitudeFormatter
@@ -158,3 +159,25 @@ def GuardGraf(PlotData, lon_Loc, lat_Loc, Zona, T):
     date  = T.strftime("%Y_%m_%d_%H_%M_%S")
     plt.savefig( Zona +'/'+ date +'.png', dpi=450)
     plt.close(fig)
+
+def fillPlot(x, Mitj, DesvEst, titol, col):
+    
+    mp.rcParams['mathtext.fontset'] = 'stix'
+    mp.rcParams['font.family'] = 'STIXGeneral'
+    mp.rcParams.update({'font.size': 17})
+
+    fig, ax = plt.subplots(figsize=(10, 8), dpi=600)
+
+    ax.fill_between(x, Mitj-DesvEst, Mitj+DesvEst, 
+                    alpha=.5, linewidth=0, color=col)
+    ax.plot(x, Mitj, linewidth=2, color=col)
+
+
+    ax.set(xticks=x[::5], yticks=np.linspace(-4, 18, 9))
+    ax.set_ylabel('sst (ºC)', fontsize=30)
+
+    ax.set_title(titol, fontsize=25)
+
+    ax.yaxis.set_minor_locator(tck.AutoMinorLocator())
+    fig.autofmt_xdate()
+    plt.show()

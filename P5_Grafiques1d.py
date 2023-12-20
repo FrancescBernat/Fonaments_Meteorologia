@@ -10,12 +10,16 @@
 
 import numpy as np
 import pandas as pd
+import funcions as fun
 import matplotlib as mp
 import matplotlib.pyplot as plt
+from importlib import reload
 
-mp.rcParams['mathtext.fontset'] = 'stix'
-mp.rcParams['font.family'] = 'STIXGeneral'
-mp.rcParams.update({'font.size': 17})
+reload(fun)
+
+# mp.rcParams['mathtext.fontset'] = 'stix'
+# mp.rcParams['font.family'] = 'STIXGeneral'
+# mp.rcParams.update({'font.size': 17})
 
 df = pd.read_pickle("./dataframe.pkl")
 
@@ -59,47 +63,29 @@ Desv_IB, Desv_CMe, Desv_CMa = [df['Desv ' + var] for var in ['IB', 'CMe', 'CMa']
 # Mit_CMa = df['Mitj CMa']
 # Desv_CMa = df['Desv CMa']
 
-def fillPlot(Mitj, DesvEst, col):
-    
-    fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
-
-    ax.fill_between(x, Mitj-DesvEst, Mitj+DesvEst, 
-                    alpha=.5, linewidth=0, color=col)
-    ax.plot(x, Mitj, linewidth=2, color=col)
-
-    # ax.fill_between(x, Mit_CMe-Desv_CMe, Mit_CMe+Desv_CMe, 
-    #                 alpha=.5, linewidth=0)
-    # ax.plot(x, Mit_CMe, linewidth=2)
-
-    # ax.fill_between(x, Mit_CMa-Desv_CMa, Mit_CMa+Desv_CMa, 
-    #                 alpha=.5, linewidth=0)
-    # ax.plot(x, Mit_CMa, linewidth=2)
-
-
-    ax.set(xticks=x[::5])
-    ax.set_ylabel('sst (ºC)', fontsize=30)
-    fig.autofmt_xdate()
-    plt.show()
 
 def ErrorPlot(x, y, yerr, color):
-    fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
+    fig, ax = plt.subplots(figsize=(10, 8), dpi=600)
 
     ax.errorbar(x, y, yerr, fmt='o', linewidth=2, capsize=6,
                 color=color)
 
     # ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
     #     ylim=(0, 8), yticks=np.arange(1, 8))
-
+    ax.set(xticks=x[::5])
     fig.autofmt_xdate()
     plt.show()
 
 # for i in colors:
     # ErrorPlot(x, Mit_IB, Desv_IB, i)
 
-
-for M, D, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
-                [Desv_IB, Desv_CMe, Desv_CMa], range(3)):
-    fillPlot(M, D, colors[col])
+# Graficam les dades sense filtrar
+for M, D, tit, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
+                [Desv_IB, Desv_CMe, Desv_CMa], 
+                ['Illes Balears', 'Canal de Menorca',
+                 'Canal de Mallorca'], range(3)):
+    
+    fun.fillPlot(x, M, D, tit, colors[col])
 
 fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
 ax.plot(x, Mit_IB, label="Illes Balears", color=colors[0])
