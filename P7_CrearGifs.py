@@ -8,8 +8,6 @@
 @Version :   1.0
 '''
 
-import os
-import numpy
 import glob
 import imageio
 
@@ -21,4 +19,6 @@ filenames = glob.glob(folders[0]+"/*.png")
 images = []
 for filename in filenames:
     images.append(imageio.imread(filename))
-imageio.mimsave('movie.gif', images, duration=2)
+
+imageio.mimsave('movie.gif', images, format='GIF',
+                 duration=900)
