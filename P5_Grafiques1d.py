@@ -50,17 +50,17 @@ x = df['dia']
 Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
 Desv_IB, Desv_CMe, Desv_CMa = [df['Desv ' + var] for var in ['IB', 'CMe', 'CMa']]
 
-def ErrorPlot(x, y, yerr, color):
-    fig, ax = plt.subplots(figsize=(10, 8), dpi=600)
+# def ErrorPlot(x, y, yerr, color):
+#     fig, ax = plt.subplots(figsize=(10, 8), dpi=600)
 
-    ax.errorbar(x, y, yerr, fmt='o', linewidth=2, capsize=6,
-                color=color)
+#     ax.errorbar(x, y, yerr, fmt='o', linewidth=2, capsize=6,
+#                 color=color)
 
-    # ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-    #     ylim=(0, 8), yticks=np.arange(1, 8))
-    ax.set(xticks=x[::5])
-    fig.autofmt_xdate()
-    plt.show()
+#     # ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
+#     #     ylim=(0, 8), yticks=np.arange(1, 8))
+#     ax.set(xticks=x[::5])
+#     fig.autofmt_xdate()
+#     plt.show()
 
 # for i in colors:
     # ErrorPlot(x, Mit_IB, Desv_IB, i)
@@ -82,7 +82,9 @@ for M, D, tit, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
     fun.fillPlot(x, M, D, tit, colors[col])
     
 
-fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
+colors = ["#0718e9", "#38e416", "#eb3f24"]
+
+fig, ax = plt.subplots(figsize=(12, 10), dpi=400)
 
 i = 0
 for Mit, Desv, lab in zip([Mit_IB, Mit_CMa, Mit_CMe],
@@ -91,7 +93,7 @@ for Mit, Desv, lab in zip([Mit_IB, Mit_CMa, Mit_CMe],
                            "Canal de Menorca"]):
     ax.errorbar(x, Mit, Desv, fmt='o', linewidth=2, capsize=6,
                 label=lab, color=colors[i])
-    i += 2
+    i += 1
 # ax.scatter(x, Mit_IB, label="Illes Balears", color=colors[0])
 # ax.scatter(x, Mit_CMe, label="Canal de Menorca", color=colors[1])
 # ax.scatter(x, Mit_CMa, label="Canal de Mallorca", color=colors[2])
