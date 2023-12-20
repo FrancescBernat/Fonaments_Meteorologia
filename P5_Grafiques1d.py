@@ -23,23 +23,26 @@ df = pd.read_pickle("./dataframe.pkl")
 r, _ = np.where(df.isna())
 r = np.unique(r)
 
-# diesNan = df['dia'][r]
-
-# df = df.drop(r)
-# plt.style.use('_mpl-gallery')
-# plt.style.use('dark_background')
-# plt.style.use('seaborn-v0_8-deep')
-
 # Miram els indexos on els Nan superen el 50 %.
 ind_Bad = []
 
 for var in ['CMe', 'CMa', 'IB']:
+
+    # Supos que quan hi ha menys nans 
+    # es quan només es te en compte les illes
     minNan = df['Nan '+var].min()
+
     aux = np.squeeze(np.where(
         (df['Nan '+var]-minNan)/df['Tam '+ var] > 0.4
         ))
     ind_Bad += aux.tolist()
+
+# Combinam el cas anterior amb  els llocs on son tots nans
 ind = np.unique(ind_Bad + r.tolist())
+
+# plt.style.use('_mpl-gallery')
+# plt.style.use('dark_background')
+# plt.style.use('seaborn-v0_8-deep')
 
 Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
 
