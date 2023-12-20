@@ -17,9 +17,9 @@ from importlib import reload
 
 reload(fun)
 
-# mp.rcParams['mathtext.fontset'] = 'stix'
-# mp.rcParams['font.family'] = 'STIXGeneral'
-# mp.rcParams.update({'font.size': 17})
+mp.rcParams['mathtext.fontset'] = 'stix'
+mp.rcParams['font.family'] = 'STIXGeneral'
+mp.rcParams.update({'font.size': 17})
 
 df = pd.read_pickle("./dataframe.pkl")
 
@@ -83,10 +83,20 @@ for M, D, tit, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
     
 
 fig, ax = plt.subplots(figsize=(10, 8), dpi=400)
-ax.plot(x, Mit_IB, label="Illes Balears", color=colors[0])
-ax.plot(x, Mit_CMe, label="Canal de Menorca", color=colors[1])
-ax.plot(x, Mit_CMa, label="Canal de Mallorca", color=colors[2])
 
+i = 0
+for Mit, Desv, lab in zip([Mit_IB, Mit_CMa, Mit_CMe],
+                          [Desv_IB, Desv_CMa, Desv_CMe],
+                          ["Illes Balears", "Canal de Mallorca",
+                           "Canal de Menorca"]):
+    ax.errorbar(x, Mit, Desv, fmt='o', linewidth=2, capsize=6,
+                label=lab, color=colors[i])
+    i += 2
+# ax.scatter(x, Mit_IB, label="Illes Balears", color=colors[0])
+# ax.scatter(x, Mit_CMe, label="Canal de Menorca", color=colors[1])
+# ax.scatter(x, Mit_CMa, label="Canal de Mallorca", color=colors[2])
+
+ax.grid()
 ax.set(xticks=x[::5])
 ax.set_ylabel('sst (ºC)', fontsize=30)
 ax.legend()
