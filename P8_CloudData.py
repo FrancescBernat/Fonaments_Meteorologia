@@ -12,6 +12,7 @@ import numpy as np
 import netCDF4 as nc
 import datetime as dt
 import cartopy as cart
+import cmocean as cm
 import matplotlib.pyplot as plt
 
 from cartopy.mpl.ticker import LatitudeFormatter, LongitudeFormatter
@@ -22,10 +23,7 @@ arxiu = "Clouds.nc"
 data = nc.Dataset(arxiu, 'r')
 
 time = data['time'][:]
-t = time[0]
-start = dt.datetime(1990,1,1,0,0,0)   
-# t = dt.datenum(1900,1,1,np.double(t),0,0)
-# dt.datetime(1900,1,1,0,0,0)+dt.timedelta(hours=int(t))
+
 T = [dt.datetime(1900,1,1,0,0,0)+dt.timedelta(hours=int(t)) 
      for t in time]
 
@@ -50,7 +48,7 @@ for i in range(len(T)):
     ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)
 
     plot = ax.contourf(lon, lat, tcc[i], 70, transform=cart.crs.PlateCarree(),
-                    cmap='jet')# cmap='RdYlBu_r')
+                    cmap=cm.cm.rain)# cmap='RdYlBu_r')
 
     # Ticks per a la longitud
     ax.set_xticks(lon[::3], crs=cart.crs.PlateCarree())
