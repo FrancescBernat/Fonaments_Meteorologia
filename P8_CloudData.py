@@ -10,12 +10,16 @@
 
 import numpy as np
 import netCDF4 as nc
+import datetime as dt
 import cartopy as cart
 import matplotlib.pyplot as plt
 
 arxiu = "Clouds.nc"
 
 data = nc.Dataset(arxiu, 'r')
+
+time = data['time'][:]
+start = dt.datetime(1990,1,1,0,0,0)   
 
 lat = data['latitude'][:]
 lon = data['longitude'][:]
@@ -25,6 +29,10 @@ tcc = data['tcc'][:]
 
 # cloud base height
 cbh = data['cbh'][:]
+
+# low cloud cover
+lcc = data['lcc'][:]
+
 
 # for i in range(5):
 T = 0;
