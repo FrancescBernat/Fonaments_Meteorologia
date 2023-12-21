@@ -8,5 +8,18 @@
 @Version :   1.0
 '''
 
+import netCDF4 as nc
 import numpy as np
 import matplotlib.pyplot as plt
+
+arxiu = "Clouds.nc"
+
+data = nc.Dataset(arxiu, 'r')
+
+lat = data['latitude'][:]
+lon = data['longitude'][:]
+
+# total cloud cover
+tcc = data['tcc'][:]
+
+
