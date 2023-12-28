@@ -24,7 +24,6 @@ import matplotlib.pyplot as plt
 
 from cartopy.mpl.ticker import LatitudeFormatter
 from cartopy.mpl.ticker import LongitudeFormatter
-from matplotlib.colors import LinearSegmentedColormap
 
 # Per a cambiar les lletres a l'estil que és te a latex
 mp.rcParams['mathtext.fontset'] = 'stix'

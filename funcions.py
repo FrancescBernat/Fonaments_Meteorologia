@@ -136,7 +136,7 @@ def GuardGraf(PlotData, lon_Loc, lat_Loc, Zona, T):
     ax.coastlines()
     ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)
 
-    levels = np.linspace(-4, 18, 100+1)
+    levels = np.linspace(4, 18, 100+1)
     plot = ax.contourf(PlotData.lon, PlotData.lat, PlotData, 70, 
                        transform=cart.crs.PlateCarree(), cmap='RdYlBu_r',
                        levels=levels)
