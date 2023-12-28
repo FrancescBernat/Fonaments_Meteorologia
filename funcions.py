@@ -6,6 +6,10 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+Codi on s'han escrit les funcions que emplen els altres
+arxius .py per a simplificar un poc el codi que tenen
+aquells arxius.
 '''
 
 import numpy as np
@@ -137,7 +141,6 @@ def GuardGraf(PlotData, lon_Loc, lat_Loc, Zona, T):
                        transform=cart.crs.PlateCarree(), cmap='RdYlBu_r',
                        levels=levels)
 
-
     # Ticks per a la longitud
     ax.set_xticks(np.linspace(min_lon, max_lon, 5), crs=cart.crs.PlateCarree())
     lon_formatter = LongitudeFormatter(number_format='.2f')
@@ -153,7 +156,6 @@ def GuardGraf(PlotData, lon_Loc, lat_Loc, Zona, T):
 
     cb = plt.colorbar(plot)
     cb.set_label("sst (ºC)", rotation=270)
-    # cb.mappable.set_clim(vmin=-3.5, vmax=17.5)
     
     ax.set_title(f"Dades sst pel dia {T}")
     date  = T.strftime("%Y_%m_%d_%H_%M_%S")

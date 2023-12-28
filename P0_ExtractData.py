@@ -6,6 +6,11 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.1
+
+Arxiu per a descarregar totes les dades de Modis sense
+haver-ho de fer manualment. 
+
+Segurament hi hagui alguna manera més eficient.
 '''
 
 import time
@@ -20,10 +25,10 @@ with open(file, 'r') as f:
 for l in Lines:
     print(l)
     webbrowser.open(l)
+
+    # Deixam descansar un temps per a que es descarregui sense problemes
     time.sleep(20)
+
+    # Tancam el navegador
     pyautogui.hotkey('ctrl', 'w')
     print("tab closed \n")
-
-    
-
-
