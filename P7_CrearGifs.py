@@ -6,6 +6,8 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+Generam gif's amb totes les imatges descarregades previament.
 '''
 
 import glob

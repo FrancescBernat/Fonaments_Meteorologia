@@ -6,6 +6,8 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+Representam les dades dels satel·lits que hem descarregat.
 '''
 
 import matplotlib
@@ -25,14 +27,12 @@ arxiu = 'AQUA_MODIS.20200102T125001.L2.SST.nc'
 
 # Llegim arxiu nc
 data = nc.Dataset('DadesMar/'+ arxiu, 'r')
-# print(data.groups)
 
 if 0:
     print(data.ncattrs())
     print(data.getncattr('title'))
 
 Geo = data.groups['geophysical_data']
-# print(Geo.variables.keys())
 
 # Extreim informació del dia
 info = data['scan_line_attributes']
@@ -50,11 +50,6 @@ lon = np.fliplr(nav['longitude'][:])
 
 # Extreim i ordenam correctament les dades sst
 sst = np.fliplr(Geo.variables['sst'][:])
-
-# fig, ax = plt.subplots(figsize=(9, 7), dpi=400)
-# ax.contour(lon, lat, sst)
-# ax.set_title(dia)
-# plt.show()
 
 fig = plt.figure(figsize=(9, 7), dpi=400)
 ax = plt.axes(projection=cart.crs.PlateCarree())

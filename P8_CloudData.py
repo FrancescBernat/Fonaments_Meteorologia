@@ -6,6 +6,11 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+Representam la cantidad de niguls de día 6 de gener, per 
+veure si coincideix amb l'anomalia de SST detectada.
+
+Dades extretes de ERA5
 '''
 
 import numpy as np
@@ -16,7 +21,6 @@ import cmocean as cm
 import matplotlib.pyplot as plt
 
 from cartopy.mpl.ticker import LatitudeFormatter, LongitudeFormatter
-
 
 arxiu = "Clouds.nc"
 

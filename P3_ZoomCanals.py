@@ -11,6 +11,8 @@
             Illes Balears
     CMa --> Abreviació que usaré pel canal de Mallorca
     CMe --> Abreviació que usaré pel canal de Menorca
+
+Ara enfocam també pel canal de Mallorca i pel de Menorca.    
 '''
 
 import numpy as np
@@ -102,7 +104,6 @@ def ZonaZoom(dades, lon_Loc, lat_Loc):
     return dades.where(mask_lon & mask_lat, drop=True)
 
 # Ara per a poder visualitzar 
-
 def Repr(PlotData, lon_Loc, lat_Loc, Zona):
     '''
     Funció per a representar un contorn del sst de l'area de

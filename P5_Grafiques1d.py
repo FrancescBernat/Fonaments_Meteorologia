@@ -6,6 +6,9 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+Analitzam la mitjana i la desviació estandard del SST
+per a cada una de les nostres regions d'interés.
 '''
 
 import numpy as np
@@ -50,7 +53,6 @@ x = df['dia']
 Mit_IB, Mit_CMe, Mit_CMa = [df['Mitj ' + var] for var in ['IB', 'CMe', 'CMa']]
 Desv_IB, Desv_CMe, Desv_CMa = [df['Desv ' + var] for var in ['IB', 'CMe', 'CMa']]
 
-
 for M, D, tit, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
                 [Desv_IB, Desv_CMe, Desv_CMa], 
                 ['Illes Balears', 'Canal de Menorca',
@@ -65,7 +67,6 @@ for M, D, tit, col in zip([Mit_IB, Mit_CMe, Mit_CMa],
 
     # Graficam les dades filtrades
     fun.fillPlot(x, M, D, tit, colors[col])
-    
 
 colors = ["#0718e9", "#38e416", "#eb3f24"]
 
@@ -79,7 +80,6 @@ for Mit, Desv, lab in zip([Mit_IB, Mit_CMa, Mit_CMe],
     ax.errorbar(x, Mit, Desv, fmt='o', linewidth=2, capsize=6,
                 label=lab, color=colors[i])
     i += 1
-
 
 ax.grid()
 ax.set(xticks=x[::5])

@@ -6,6 +6,8 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+Provam d'enfocar la regió que ens interessa estudiar.
 '''
 
 import numpy as np
@@ -15,7 +17,6 @@ import cartopy as cart
 import matplotlib as mp
 import matplotlib.pyplot as plt
 
-from cmocean import cm
 from matplotlib.colors import LinearSegmentedColormap
 from cartopy.mpl.ticker import LatitudeFormatter, LongitudeFormatter
 

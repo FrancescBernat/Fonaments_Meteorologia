@@ -6,6 +6,9 @@
 @Author  :   Francesc Bernat Bieri Tauler 
 @Contact :   franz@canmenut.com
 @Version :   1.0
+
+Guardam el camp de SST que veu el  satel·lit, per cada
+una de les zones i per cada un dels dies.
 '''
 
 import glob 

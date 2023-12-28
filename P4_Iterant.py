@@ -10,6 +10,8 @@
     IB  -->  Per referirnos a les Illes Balears
     CMe -->  Per referirnos al canal de Menorca
     CMa -->  Per referirnos al canal de Mallorca
+
+Iteram per a totes les dades de satel·lit devallades.    
 '''
 
 import glob 
