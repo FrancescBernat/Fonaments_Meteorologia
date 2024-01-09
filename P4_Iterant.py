@@ -4,7 +4,6 @@
 @File    :   P4_Iterant.py
 @Date    :   2023/12/16 13:03:27
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
     IB  -->  Per referirnos a les Illes Balears
@@ -22,6 +21,7 @@ import funcions as fun
 import datetime as dt
 from importlib import reload
 
+# Recarregam el fitxer amb les funcions per a evitar errors
 reload(fun)
 
 nom_arxius = 'DadesMar/*_MODIS.*.SST.nc'

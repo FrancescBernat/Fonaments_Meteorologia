@@ -4,7 +4,6 @@
 @File    :   P1_ProvaLectura.py
 @Date    :   2023/12/09 23:33:03
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
 Representam les dades dels satel·lits que hem descarregat.
@@ -52,6 +51,8 @@ lon = np.fliplr(nav['longitude'][:])
 sst = np.fliplr(Geo.variables['sst'][:])
 
 fig = plt.figure(figsize=(9, 7), dpi=400)
+
+# Representam el mapa 
 ax = plt.axes(projection=cart.crs.PlateCarree())
 ax.coastlines()
 ax.add_feature(cart.feature.LAND, zorder=2, edgecolor='k', linewidth=0.05)

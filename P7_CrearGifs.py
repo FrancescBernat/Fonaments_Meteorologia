@@ -4,7 +4,6 @@
 @File    :   P7_CrearGifs.py
 @Date    :   2023/12/20 16:12:11
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
 Generam gif's amb totes les imatges descarregades previament.
@@ -20,10 +19,12 @@ i = 0
 for folder in folders:
     filenames = glob.glob(folder+"/*.png")
 
+    # Anam afegit les imatges a una carpeta
     images = []
     for filename in filenames:
         images.append(imageio.imread(filename))
 
+    # Guarda les imatges dins aquesta carpeta com a un gif
     imageio.mimsave(subfolders[i]+'.gif', images,
                     format='GIF', duration=900)
     i += 1

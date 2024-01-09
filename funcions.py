@@ -4,7 +4,6 @@
 @File    :   funcions.py
 @Date    :   2023/12/16 13:49:05
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
 Codi on s'han escrit les funcions que emplen els altres
@@ -108,6 +107,7 @@ def Repr(PlotData, lon_Loc, lat_Loc, Zona, T):
     lat_formatter = LatitudeFormatter(number_format='.2f')
     ax.yaxis.set_major_formatter(lat_formatter)
 
+    # Límitam els eixos
     ax.set_xlim([min_lon, max_lon])
     ax.set_ylim([min_lat, max_lat])
 
@@ -180,6 +180,9 @@ def fillPlot(x, Mitj, DesvEst, titol, col):
 
     ax.set_title(titol, fontsize=25)
 
+    # Per tenir ticks petits en l'eix y
     ax.yaxis.set_minor_locator(tck.AutoMinorLocator())
+
+    # Formata les dades de l'eix x per a que siguin llegibles
     fig.autofmt_xdate()
     plt.show()

@@ -4,7 +4,6 @@
 @File    :   P5_Grafiques1d.py
 @Date    :   2023/12/18 15:53:45
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
 Analitzam la mitjana i la desviació estandard del SST
@@ -82,8 +81,8 @@ for Mit, Desv, lab in zip([Mit_IB, Mit_CMa, Mit_CMe],
     i += 1
 
 ax.grid()
-ax.set(xticks=x[::5])
+ax.set(xticks=x[::5]) # Reduim les dades a un nombre manejable
 ax.set_ylabel('sst (ºC)', fontsize=30)
 ax.legend()
-fig.autofmt_xdate()
+fig.autofmt_xdate() # Formata les dates del fons 
 plt.show()

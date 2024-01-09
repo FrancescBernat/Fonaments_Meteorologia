@@ -4,7 +4,6 @@
 @File    :   P8_CloudData.py
 @Date    :   2023/12/21 16:21:52
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
 Representam la cantidad de niguls de día 6 de gener, per 
@@ -13,7 +12,6 @@ veure si coincideix amb l'anomalia de SST detectada.
 Dades extretes de ERA5
 '''
 
-import numpy as np
 import netCDF4 as nc
 import datetime as dt
 import cartopy as cart

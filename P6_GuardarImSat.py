@@ -4,7 +4,6 @@
 @File    :   P6_GuardarImSat.py
 @Date    :   2023/12/18 16:04:05
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
 Guardam el camp de SST que veu el  satel·lit, per cada

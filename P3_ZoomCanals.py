@@ -4,7 +4,6 @@
 @File    :   P3_ZoomCanals.py
 @Date    :   2023/12/15 14:20:40
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
     Glo --> Abrevació per les coordenades que conté les 
@@ -32,6 +31,7 @@ mp.rcParams.update({'font.size': 14})
 
 arxiu = 'AQUA_MODIS.20200102T125001.L2.SST.nc'
 
+# Definim funcions per alleugerir la feina
 def DadesMODIS(arxiu):
     '''
     Funció que, donat el nom d'un arxiu determinat nom d'un arxiu de 
@@ -139,11 +139,13 @@ def Repr(PlotData, lon_Loc, lat_Loc, Zona):
     ax.set_title(f"Dades sst pel dia {T} a {Zona}")
     plt.show()
 
+# Dades de cada zona
 lats = [lat_Glo, lat_CMe, lat_CMa]
 lons = [lon_Glo, lon_CMe, lon_CMa]
 labels = ['Illes Balears', 'Canal de Menorca', 
           'Canal de Mallorca']
 
+# Iteram per a cada zona d'estudi
 for la, lo, lab in zip(lats, lons, labels):
     red_data = ZonaZoom(data, lo, la)
     Repr(red_data, lo, la, lab)

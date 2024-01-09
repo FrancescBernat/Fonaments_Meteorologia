@@ -4,7 +4,6 @@
 @File    :   P2_Zoom.py
 @Date    :   2023/12/14 17:30:13
 @Author  :   Francesc Bernat Bieri Tauler 
-@Contact :   franz@canmenut.com
 @Version :   1.0
 
 Provam d'enfocar la regió que ens interessa estudiar.
@@ -43,19 +42,23 @@ nav = data['navigation_data']
 lat = np.fliplr(nav['latitude'][:])
 lon = np.fliplr(nav['longitude'][:])
 
+# Definim les coordenades màximes i mínime
 min_lon = 1
 max_lon = 6
 
 min_lat = 37
 max_lat = 42
 
+# Cream un data array per tenir 
 da = xr.DataArray(sst, dims=['x', 'y'], 
                   coords = dict(lon=(["x", "y"], lon), 
                                 lat=(["x", "y"], lat)))
 
+# Si els punts estan a dins o fora de la regió d'interes
 mask_lon = (da.lon >= min_lon) & (da.lon <= max_lon)
 mask_lat = (da.lat >= min_lat) & (da.lat <= max_lat)
 
+# Eliminam els punts fora dels límits marcats
 cro_da = da.where(mask_lon & mask_lat, drop=True)
 
 
